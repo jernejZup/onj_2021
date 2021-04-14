@@ -1,4 +1,4 @@
-This is a TF-IDF based program for offensive language detection
+This is a TF-IDF based program for offensive language detection.
 
 The program goes through several phases:
   - Removing noise from data
