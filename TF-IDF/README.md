@@ -24,3 +24,12 @@ The dataset is divided into three subtasks, which are:
   - C: Offense target identification
 
 Where our program takes these subtasks into account and does the classification according to them.
+
+To succesfully run the program you will need the following Python libraries:
+  - NLTK
+  - Scikit Learn
+  - Pandas
+  - Numpy
+  - tqdm
+
+We hope you will have fun with our program.
