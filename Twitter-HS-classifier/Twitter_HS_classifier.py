@@ -1,9 +1,12 @@
 import numpy as np
 import pandas as pd
+from sklearn.neighbors import KNeighborsClassifier
+
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction import text
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
+from sklearn.naive_bayes import GaussianNB, MultinomialNB, ComplementNB, BernoulliNB
 from sklearn.model_selection import KFold
 from sklearn.feature_extraction import text
 import matplotlib.pyplot as plt
@@ -14,14 +17,17 @@ from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
 import nltk
 import re
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, accuracy_score
 import itertools
 from sklearn.svm import LinearSVC
 from sklearn.metrics import classification_report
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer as sia
 from textstat.textstat import *
-
+import os
 #read data
 def readData(filename):
     cur_dir = os.path.dirname(os.path.abspath(__file__))
@@ -43,6 +49,7 @@ def cleanData(dataSet):
     '''tokenize each tweet into a list; just keep useful words;
     return a list in which each element denotes the list of each tweet'''
     tweets = dataSet
+    print(len(tweets))
     table = str.maketrans('', '', punctuation)
     # add and delete words from stop_words
     stop_words = stopwords.words('english')[:]
@@ -443,17 +450,26 @@ def plot_confusion_matrix(cm, classes,
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
 
-SVM = LinearSVC(multi_class='ovr')
-SVM.fit(features_train, y_train)
-y_preds_SVM = SVM.predict(features_test)
-report = classification_report(y_test, y_preds_SVM )
+#classifier = KNeighborsClassifier(n_neighbors=5)
+#classifier = LogisticRegression(multi_class='auto', solver='newton-cg',) ---> Takes A LOOOONG TIME
+#classifier = RandomForestClassifier(max_depth=50, random_state=0)
+#classifier = DecisionTreeClassifier()
+#classifier = BernoulliNB(alpha=0.7)
+#classifier = ComplementNB(alpha=0.7) # ---> Not working
+classifier = GaussianNB()
+#classifier = MultinomialNB(alpha=0.5) # ---> Not working
+#classifier = LinearSVC(multi_class='ovr')
+classifier.fit(features_train, y_train)
+y_preds_classifier = classifier.predict(features_test)
+report = classification_report(y_test, y_preds_classifier )
 
-#print(report)
+#TODO: IZPIŠE STATISTIKO O NATANČNOSTI....
+print(report)
 
 # Compute confusion matrix
-class_names = ['Hate','Offensive','Neither']
+class_names = ['Hate', 'Offensive', 'Neither']
 
-cnf_matrix = confusion_matrix(y_test, y_preds_SVM)
+cnf_matrix = confusion_matrix(y_test, y_preds_classifier)
 #print(cnf_matrix)
 np.set_printoptions(precision=2)
 
@@ -463,3 +479,9 @@ plot_confusion_matrix(cnf_matrix, classes=class_names, normalize=True,
                       title='Confusion matrix')
 
 plt.show()
+
+# accuracy = accuracy_score(y_train, classifier.predict(features_train))
+# print("Training Accuracy:", accuracy)
+# test_predictions = classifier.predict(features_train)
+# accuracy = accuracy_score(ylabel, test_predictions)
+# print("Test Accuracy:", accuracy)
