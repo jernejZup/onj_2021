@@ -9,6 +9,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LogisticRegression
 from load_test_data import load
+from sklearn.metrics import classification_report
 
 def classify(vectors, labels, train_text, task, type):
     # Random Splitting With Ratio 3 : 1
@@ -50,7 +51,8 @@ def classify(vectors, labels, train_text, task, type):
     accuracy = accuracy_score(train_labels, classifier.predict(train_vectors))
     print("Training Accuracy:", accuracy)
     test_predictions = classifier.predict(test_vectors)
-    accuracy = accuracy_score(test_labels, test_predictions)
-    print("Test Accuracy:", accuracy)
+    #accuracy = accuracy_score(test_labels, test_predictions)
+    report = classification_report(test_labels, test_predictions)
+    print("Classifier report:", report)
     print("Confusion Matrix:", )
     print(confusion_matrix(test_labels, test_predictions))
