@@ -6,7 +6,7 @@ Offensive language exploratory analysis
 
 ***
 
-Repository structuring:
+Repository structure:
 - [TF-IDF](TF-IDF/)
 - [POS tagging](Twitter-HS-classifier/)
 - [BERT-SLO](bert_slo/)
