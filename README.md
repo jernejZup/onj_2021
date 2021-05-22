@@ -7,6 +7,7 @@ Offensive language exploratory analysis
 ***
 
 Repository structure:
+- [Hate-Sonar](HateSonar/)
 - [TF-IDF](TF-IDF/)
 - [POS tagging](Twitter-HS-classifier/)
 - [BERT-SLO](bert_slo/)
