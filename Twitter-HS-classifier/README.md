@@ -4,7 +4,7 @@ The program classifies tweets from the provided dataset into three classes:
   - Hatefull
   - Neither
 The results of the algorithm using different models on the provided dataset is available in the [Reports](Reports/) directory.
-And the confusion matrices are available in the [Confusion Matrices](Reports/) directory.
+And the confusion matrices are available in the [Confusion Matrices](Confusion Matrices/) directory.
 
 The program (run Twitter_HS_classifier.py) goes through several phases:
   - Tokenization
