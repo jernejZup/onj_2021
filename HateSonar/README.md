@@ -7,5 +7,5 @@ Our program goes trough several phases:
 
 Hate sonar is only designed to work with English!
 
-To install hat sonar just use pip:
+To install hate sonar just use pip:
 pip install hatesonar
